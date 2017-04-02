@@ -36,7 +36,8 @@ public class BasicDocument extends Document
 	{
 		//TODO: Implement this method in week 2 according to the comments above.  
 		// See the Module 2 support videos if you need help.
-	    return 0;
+		List<String> tokens = getTokens("[a-zA-Z]+");
+	    return tokens.size();
 	}
 	
 	/**
@@ -56,7 +57,8 @@ public class BasicDocument extends Document
 	{
 	    //TODO: Implement this method.  See the Module 2 support videos 
         // if you need help.
-        return 0;
+		List<String> tokens = getTokens("[^.!?]+");
+        return tokens.size();
 	}
 	
 	/**
@@ -81,7 +83,14 @@ public class BasicDocument extends Document
 		// expression for the syllable counting.  We recommend you implement 
 		// the helper function countSyllables in Document.java using a loop, 
 		// and then call it here on each word.
-        return 0;
+		List<String> tokens = getTokens("[a-zA-z]+");
+		int count = 0;
+		//System.out.println(tokens);
+		for(String word : tokens){
+			count = count + countSyllables(word);
+		}
+		
+        return count;
 	}
 	
 	
@@ -95,6 +104,14 @@ public class BasicDocument extends Document
 		 * in the string, respectively.  You can use these examples to help clarify 
 		 * your understanding of how to count syllables, words, and sentences.
 		 */
+		
+		String s = "%one%%two%%%three%%%%";
+		
+		System.out.println(s.split("%+").toString());
+		System.out.println(s.split("[a-z]+").toString());
+		System.out.println(s.split("one|two|three").toString());
+		System.out.println(s.split("[one,two,three]").toString());
+		
 		testCase(new BasicDocument("This is a test.  How many???  "
 		        + "Senteeeeeeeeeences are here... there should be 5!  Right?"),
 				16, 13, 5);

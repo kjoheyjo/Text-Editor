@@ -13,30 +13,30 @@ public class BasicDocumentGrader {
             System.out.println("Sentences, words, and syllables:");
             BufferedReader br = new BufferedReader(new FileReader("test_cases/mod1TestCases.txt"));
             String line;
-            PrintWriter out = new PrintWriter("grader_output/module1.part1.out", "utf-8");
+            //PrintWriter out = new PrintWriter("grader_output/module1.part1.out", "utf-8");
             while ((line = br.readLine()) != null)
             {
                 BasicDocument doc = new BasicDocument(line);
-                String result = doc.getNumSentences() + " " + doc.getNumWords() + " " + doc.getNumSyllables() + " ";
+                String result = doc.getNumSentences() + " " + doc.getNumWords() + " " + doc.getNumSyllables() + " \n";
                 System.out.print(result);
-                out.print(result);
+              //  out.print(result);
             }
-            out.print("\n");
-            out.close();
+            //out.print("\n");
+            //out.close();
             System.out.println("\nFlesch scores:");
             br.close();
 
             br = new BufferedReader(new FileReader("test_cases/mod1TestCases.txt"));
-            out = new PrintWriter("grader_output/module1.part2.out", "utf-8");
+            //out = new PrintWriter("grader_output/module1.part2.out", "utf-8");
             while ((line = br.readLine()) != null)
             {
                 BasicDocument doc = new BasicDocument(line);
-                String result = doc.getFleschScore() + " ";
+                String result = doc.getFleschScore() + " \n";
                 System.out.print(result);
-                out.print(result);
+              //  out.print(result);
             }
-            out.print("\n");
-            out.close();
+            //out.print("\n");
+            //out.close();
             System.out.print('\n');
             br.close();
         }

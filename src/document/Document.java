@@ -2,7 +2,7 @@ package document;
 
 /** 
  * A class that represents a text document
- * @author UC San Diego Intermediate Programming MOOC team
+ * @author Kaustubh Joshi
  */
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +67,55 @@ public abstract class Document {
 		// TODO: Implement this method so that you can call it from the 
 	    // getNumSyllables method in BasicDocument (module 2) and 
 	    // EfficientDocument (module 3).
-	    return 0;
+		List<String> vowels = new ArrayList<String>();
+		vowels.add("a");
+		vowels.add("e");
+		vowels.add("i");
+		vowels.add("o");
+		vowels.add("u");
+		vowels.add("y");
+		
+		vowels.add("A");
+		vowels.add("E");
+		vowels.add("I");
+		vowels.add("O");
+		vowels.add("U");
+		vowels.add("Y");
+		
+		int count = 0;
+		boolean isLastCharVowel = false;
+		
+		for(int i = 0; i < word.length(); i++ ){
+			if( isVowel(word.charAt(i),vowels) && !isLastCharVowel){
+				if(i == word.length() - 1 && word.charAt(i) == 'e'){
+					if(count == 0){
+						count++;
+					}
+					break;
+				}
+				count++;
+				isLastCharVowel = true;
+			}
+			else if(isVowel(word.charAt(i),vowels) && isLastCharVowel){
+				continue;
+			}
+			else{
+				isLastCharVowel = false;
+			}
+		}
+		
+	    return count;
+	}
+	
+	private boolean isVowel(char c,List<String> vowels){
+		
+		for(String vowel : vowels){
+			if(c == vowel.charAt(0)){
+				return true;
+			}
+		}
+		
+		return false;
 	}
 	
 	/** A method for testing
@@ -81,7 +129,7 @@ public abstract class Document {
 	public static boolean testCase(Document doc, int syllables, int words, int sentences)
 	{
 		System.out.println("Testing text: ");
-		System.out.print(doc.getText() + "\n....");
+		System.out.print(doc.getText() + "\n.... \n");
 		boolean passed = true;
 		int syllFound = doc.getNumSyllables();
 		int wordsFound = doc.getNumWords();
@@ -132,7 +180,13 @@ public abstract class Document {
 	{
 	    // TODO: You will play with this method in week 1, and 
 		// then implement it in week 2
-	    return 0.0;
+		double score = 0;
+		int numWords = this.getNumWords();
+		int numSentences = this.getNumSentences();
+		int numSyllables = this.getNumSyllables();
+		
+		score = 206.835  - ( 1.015 * numWords / numSentences) - (84.6 * numSyllables / numWords);   
+	    return score;
 	}
 	
 	
