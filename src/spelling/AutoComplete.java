@@ -6,7 +6,7 @@ package spelling;
 import java.util.List;
 
 /**
- * @author Christine
+ * @author Kaustubh
  *
  */
 public interface AutoComplete {
