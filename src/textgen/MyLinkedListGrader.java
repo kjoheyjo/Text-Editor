@@ -45,12 +45,12 @@ public class MyLinkedListGrader {
                 int incorrect = 0;
                 int tests = 0;
                 String feedback = "";
-		try {
+	/*	try {
 			out = new PrintWriter("grader_output/module3.part1.out", "utf-8");
 		} catch (Exception e) {
 			e.printStackTrace();
 			return;
-		}
+		}*/
 		MyLinkedList<Integer> lst = new MyLinkedList<Integer>();
 		int nums[] = {1, 2, 3, 4, 5};
 		
@@ -96,8 +96,8 @@ public class MyLinkedListGrader {
 
                 feedback += "** Tests 11-20: Testing method bounds...";
                 
-                out.println(feedback + "Tests complete. Check that everything is as expected.");
-                out.close();
+                System.out.println(feedback + "Tests complete. Check that everything is as expected.");
+                //out.close();
 		
 	}
 	

@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * @author UC San Diego MOOC team
+ * @author Kaustubh Joshi
  *
  */
 public class DictionaryLLTester {

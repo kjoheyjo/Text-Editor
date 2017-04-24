@@ -3,7 +3,7 @@ package spelling;
 import java.util.TreeSet;
 
 /**
- * @author UC San Diego Intermediate MOOC team
+ * @author Kaustubh Joshi
  *
  */
 public class DictionaryBST implements Dictionary 
@@ -13,6 +13,9 @@ public class DictionaryBST implements Dictionary
     // TODO: Implement the dictionary interface using a TreeSet.  
  	// You'll need a constructor here
 	
+   	public DictionaryBST(){
+   		dict = new TreeSet<String>();
+   	}
     
     /** Add this word to the dictionary.  Convert it to lowercase first
      * for the assignment requirements.
@@ -21,7 +24,14 @@ public class DictionaryBST implements Dictionary
      * (it wasn't already there). */
     public boolean addWord(String word) {
     	// TODO: Implement this method
-        return false;
+    	String s = word.toLowerCase();
+    	
+    	if(isWord(s)){
+    		return false;
+    	}else{
+    		dict.add(s);
+    		return true;
+    	}
     }
 
 
@@ -29,13 +39,16 @@ public class DictionaryBST implements Dictionary
     public int size()
     {
     	// TODO: Implement this method
-        return 0;
+        return dict.size();
     }
 
     /** Is this a word according to this dictionary? */
     public boolean isWord(String s) {
     	//TODO: Implement this method
-        return false;
+    	
+    	String word = s.toLowerCase();
+    	
+        return dict.contains(word);
     }
 
 }

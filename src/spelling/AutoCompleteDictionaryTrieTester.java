@@ -12,7 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * @author UC San Diego MOOC team
+ * @author Kaustubh Joshi
  *
  */
 public class AutoCompleteDictionaryTrieTester {
@@ -53,6 +53,7 @@ public class AutoCompleteDictionaryTrieTester {
 	public void testSize()
 	{
 		assertEquals("Testing size for empty dict", 0, emptyDict.size());
+		System.out.println(smallDict.size() + " " + largeDict.size());
 		assertEquals("Testing size for small dict", 8, smallDict.size());
 		assertEquals("Testing size for large dict", 4438, largeDict.size());
 	}

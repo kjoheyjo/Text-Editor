@@ -2,19 +2,20 @@ package spelling;
 
 import java.util.List;
 import java.util.Set;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 
 /** 
  * An trie data structure that implements the Dictionary and the AutoComplete ADT
- * @author You
+ * @author Kaustubh Joshi
  *
  */
 public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 
     private TrieNode root;
-    private int size;
+    private int size = 0;
     
 
     public AutoCompleteDictionaryTrie()
@@ -40,7 +41,34 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 	public boolean addWord(String word)
 	{
 	    //TODO: Implement this method.
-	    return false;
+		String s = word.toLowerCase();
+		
+		TrieNode temp = root;
+		
+		if(isWord(s)){
+			return false;
+		}else{
+			
+			for(int i = 0; i < s.length() ; i++){
+				
+				if(temp.getChild(s.charAt(i)) == null){
+					
+					temp = temp.insert(s.charAt(i));
+					
+				}else{
+					temp = temp.getChild(s.charAt(i));
+				}
+				
+			}
+			
+			temp.setEndsWord(true);
+			
+			size++;
+			
+			return true;
+			
+		}
+		
 	}
 	
 	/** 
@@ -50,7 +78,8 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 	public int size()
 	{
 	    //TODO: Implement this method
-	    return 0;
+		//printTree();
+	    return size;
 	}
 	
 	
@@ -60,7 +89,30 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 	public boolean isWord(String s) 
 	{
 	    // TODO: Implement this method
-		return false;
+		TrieNode temp = root;
+		String word = s.toLowerCase();
+		
+		if(s.isEmpty()){
+			return false;
+		}
+		
+		for(int i  = 0 ; i < s.length() ; i++){
+			
+			temp = temp.getChild(word.charAt(i));
+			
+			if(temp == null){
+				return false;
+			}else{
+				continue;
+			}
+			
+		}
+		if(temp.endsWord()){
+			return true;
+		}else{
+			return false;
+		}
+		
 	}
 
 	/** 
@@ -101,7 +153,41 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
     	 //       Add all of its child nodes to the back of the queue
     	 // Return the list of completions
     	 
-         return null;
+    	 List<String> predictions = new ArrayList<String>();
+    	 String stem = prefix.toLowerCase();
+    	 TrieNode temp = root;
+    	 
+    	 for(int i = 0; i < stem.length(); i++){
+    		 if(temp.getChild(stem.charAt(i)) == null){
+    			 return predictions;
+    		 }else{
+    			 temp = temp.getChild(stem.charAt(i));
+    		 }
+    	 }
+    	 
+    	 LinkedList<TrieNode> queue = new LinkedList<TrieNode>();
+    	 
+    	 queue.add(temp);
+    	 
+    	 while(!queue.isEmpty() && predictions.size() < numCompletions){
+    		 
+    		 TrieNode next = queue.removeFirst();
+    		 
+    		 if(next.endsWord()){
+    			 predictions.add(next.getText());
+    		 }
+    		 
+    		 for(Character c : next.getValidNextCharacters()){
+    			 
+    			 queue.add(next.getChild(c));
+    			 
+    		 }
+    		 
+    	 }
+    	 
+    	 
+    	 
+         return predictions;
      }
 
  	// For debugging
@@ -116,7 +202,7 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
  		if (curr == null) 
  			return;
  		
- 		System.out.println(curr.getText());
+ 		System.out.println(curr.getText() + " " + curr.endsWord());
  		
  		TrieNode next = null;
  		for (Character c : curr.getValidNextCharacters()) {
